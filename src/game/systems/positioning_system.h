@@ -16,6 +16,7 @@
 
 #include "../../util/vec2.h"
 #include "../components/transform.h"
+#include "../components/turret.h"
 
 class PositioningSystem
 {
@@ -28,7 +29,7 @@ class PositioningSystem
      */
     static void update(entt::registry &registry, double dt)
     {
-        auto view = registry.view<Transform>();
+        auto view = registry.view<Transform, Turret>();
 
         for (auto entity : view)
         {

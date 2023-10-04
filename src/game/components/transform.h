@@ -81,6 +81,15 @@ class Transform
         rotation_ = rotation;
     }
 
+    /**
+     * @brief Get center of transform
+     *
+     */
+    auto getCenter() const -> Vec2<double>
+    {
+        return position_ + size_ / 2.0;
+    }
+
   private:
     /// @brief Position in world space
     Vec2<double> position_{0.0, 0.0};
