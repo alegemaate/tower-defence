@@ -17,7 +17,7 @@ class Turret
 {
   public:
     Turret(double cooldown, double speed, double damage, double range)
-        : cooldown_(cooldown), speed_(speed), damage_(damage), range_(range), initial_cooldown_(cooldown)
+        : cooldown_(cooldown), initial_cooldown_(cooldown), speed_(speed), damage_(damage), range_(range)
     {
     }
 

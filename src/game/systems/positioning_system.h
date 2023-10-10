@@ -38,7 +38,10 @@ class PositioningSystem
             auto mouse_position = Vec2<double>(asw::input::mouse.x, asw::input::mouse.y);
             auto transform_center = transform.getPosition() + transform.getSize() / 2.0;
 
-            transform.setRotation((mouse_position - transform_center).angle() * 180.0 / M_PI);
+            // Slow movement
+            auto desired_rotation = (mouse_position - transform_center).angle() * (180.0 / M_PI);
+            auto delta_rotation = (desired_rotation - transform.getRotation()) / 30.0;
+            transform.setRotation(transform.getRotation() + delta_rotation);
         }
     }
 };

@@ -40,11 +40,13 @@ class ShootingSystem
 
                 // Create bullet
                 auto bullet = registry.create();
-                registry.emplace<Transform>(bullet, transform.getCenter(), Vec2<double>(16.0, 16.0),
-                                            transform.getRotation());
+                registry.emplace<Transform>(bullet, transform.getCenter() - Vec2<double>(32.0, 32.0),
+                                            Vec2<double>(64.0, 64.0), transform.getRotation());
                 registry.emplace<Velocity>(bullet, bullet_velocity, 1.0);
                 registry.emplace<Bullet>(bullet, turret.getDamage());
-                registry.emplace<Sprite>(bullet, "assets/intro.png");
+                auto &sprite = registry.emplace<Sprite>(bullet, "assets/spritesheet.png",
+                                                        Vec4<double>(128.0 * 19.0, 128.0 * 11.0, 128.0, 128.0));
+                sprite.setLayer(-16);
 
                 // Reset cooldown
                 turret.resetCooldown();

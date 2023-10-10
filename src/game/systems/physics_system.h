@@ -30,6 +30,15 @@ class PhysicsSystem
             // Move transform
             transform.setPosition(transform.getPosition() + velocity.getVelocity() * delta);
             transform.setRotation(transform.getRotation() + velocity.getAngularVelocity() * delta);
+
+            // Offscreen
+            const auto screen_size = asw::display::getSize();
+
+            if (transform.getPosition().x < 0 || transform.getPosition().x > screen_size.x ||
+                transform.getPosition().y < 0 || transform.getPosition().y > screen_size.y)
+            {
+                registry.destroy(entity);
+            }
         }
     }
 };

@@ -15,13 +15,14 @@
 
 #include "../../util/vec2.h"
 #include "../../util/vec4.h"
+#include "../sprite_registry.h"
 
 class Sprite
 {
   public:
     explicit Sprite(const std::string &path)
     {
-        sprite_ = asw::assets::loadTexture(path);
+        sprite_ = SpriteRegistry::loadTexture(path);
 
         auto sprite_size = asw::util::getTextureSize(sprite_);
         clip_ = Vec4<double>(0, 0, sprite_size.x, sprite_size.y);
@@ -30,7 +31,7 @@ class Sprite
     Sprite(const std::string &path, const Vec4<double> &clip, const double rotation = 0.0)
         : clip_(clip), rotation_(rotation)
     {
-        sprite_ = asw::assets::loadTexture(path);
+        sprite_ = SpriteRegistry::loadTexture(path);
     }
 
     void draw(const Vec2<double> &position, const Vec2<double> &size, double rotation) const
@@ -39,10 +40,22 @@ class Sprite
                                            size.y, rotation + rotation_);
     }
 
+    void setLayer(int layer)
+    {
+        layer_ = layer;
+    }
+
+    int getLayer() const
+    {
+        return layer_;
+    }
+
   private:
     asw::Texture sprite_;
 
     Vec4<double> clip_;
 
-    double rotation_;
+    double rotation_{0.0};
+
+    int layer_{0};
 };

@@ -12,6 +12,8 @@
 
 #include "../../util/vec2.h"
 
+#include <cmath>
+
 class Transform
 {
   public:
@@ -78,6 +80,7 @@ class Transform
      */
     void setRotation(double rotation)
     {
+
         rotation_ = rotation;
     }
 

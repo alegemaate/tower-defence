@@ -10,12 +10,12 @@ class SpriteRendererSystem
   public:
     static void update(entt::registry &registry)
     {
-        auto view = registry.view<Sprite, Transform>();
-        for (auto entity : view)
-        {
-            auto &sprite = view.get<Sprite>(entity);
-            auto &transform = view.get<Transform>(entity);
+        // Sort by layer
+        registry.sort<Sprite>([](const auto &lhs, const auto &rhs) { return lhs.getLayer() < rhs.getLayer(); });
 
+        auto view = registry.view<const Sprite, const Transform>();
+        for (auto [_, sprite, transform] : view.each())
+        {
             sprite.draw(transform.getPosition(), transform.getSize(), transform.getRotation());
         }
     }
