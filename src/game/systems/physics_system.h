@@ -28,8 +28,8 @@ class PhysicsSystem
             auto &velocity = view.get<Velocity>(entity);
 
             // Move transform
-            transform.setPosition(transform.getPosition() + velocity.getVelocity() * delta);
-            transform.setRotation(transform.getRotation() + velocity.getAngularVelocity() * delta);
+            transform.setPosition(transform.getPosition() + velocity.velocity * delta);
+            transform.setRotation(transform.getRotation() + velocity.angular_velocity * delta);
 
             // Offscreen
             const auto screen_size = asw::display::getSize();

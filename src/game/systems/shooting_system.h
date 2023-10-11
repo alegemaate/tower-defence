@@ -30,31 +30,31 @@ class ShootingSystem
             auto &turret = view.get<Turret>(entity);
 
             // Shoot bullet
-            if (turret.getCooldown() <= 0)
+            if (turret.cooldown <= 0)
             {
 
                 // Calculate vec2 velocity based on rotation of transform and speed of turret
                 auto bullet_velocity = Vec2<double>(cos(transform.getRotation() * M_PI / 180.0),
                                                     sin(transform.getRotation() * M_PI / 180.0)) *
-                                       turret.getSpeed();
+                                       turret.speed;
 
                 // Create bullet
                 auto bullet = registry.create();
                 registry.emplace<Transform>(bullet, transform.getCenter() - Vec2<double>(32.0, 32.0),
                                             Vec2<double>(64.0, 64.0), transform.getRotation());
                 registry.emplace<Velocity>(bullet, bullet_velocity, 1.0);
-                registry.emplace<Bullet>(bullet, turret.getDamage());
+                registry.emplace<Bullet>(bullet, turret.damage);
                 auto &sprite = registry.emplace<Sprite>(bullet, "assets/spritesheet.png",
                                                         Vec4<double>(128.0 * 19.0, 128.0 * 11.0, 128.0, 128.0));
                 sprite.setLayer(-16);
 
                 // Reset cooldown
-                turret.resetCooldown();
+                turret.cooldown = turret.initial_cooldown;
             }
             else
             {
                 // Update cooldown
-                turret.setCooldown(turret.getCooldown() - delta);
+                turret.cooldown = turret.cooldown - delta;
             }
         }
     }

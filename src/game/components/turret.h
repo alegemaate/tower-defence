@@ -13,67 +13,23 @@
 
 #include "../../util/vec2.h"
 
-class Turret
+struct Turret
 {
-  public:
-    Turret(double cooldown, double speed, double damage, double range)
-        : cooldown_(cooldown), initial_cooldown_(cooldown), speed_(speed), damage_(damage), range_(range)
-    {
-    }
+    /// @brief cooldown in seconds
+    double cooldown{1.0};
 
-    auto getCooldown() const -> double
-    {
-        return cooldown_;
-    }
+    /// @brief initial cooldown in seconds
+    double initial_cooldown{1.0};
 
-    auto setCooldown(double cooldown) -> void
-    {
-        cooldown_ = cooldown;
-    }
+    /// @brief speed in pixels per second
+    double speed{1.0};
 
-    auto getSpeed() const -> double
-    {
-        return speed_;
-    }
+    /// @brief damage per shot
+    double damage{1.0};
 
-    auto setSpeed(double speed) -> void
-    {
-        speed_ = speed;
-    }
+    /// @brief range in pixels
+    double range{1.0};
 
-    auto getDamage() const -> double
-    {
-        return damage_;
-    }
-
-    auto setDamage(double damage) -> void
-    {
-        damage_ = damage;
-    }
-
-    auto getRange() const -> double
-    {
-        return range_;
-    }
-
-    auto setRange(double range) -> void
-    {
-        range_ = range;
-    }
-
-    /**
-     * @brief Reset cooldown
-     *
-     */
-    auto resetCooldown() -> void
-    {
-        cooldown_ = initial_cooldown_;
-    }
-
-  private:
-    double cooldown_{1.0};
-    double initial_cooldown_{1.0};
-    double speed_{1.0};
-    double damage_{1.0};
-    double range_{1.0};
+    /// @brief rotation speed
+    double rotation_speed{1.0};
 };

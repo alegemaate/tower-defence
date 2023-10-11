@@ -15,6 +15,7 @@
 #include <entt/entt.hpp>
 
 #include "../../util/vec2.h"
+#include "../components/enemy.h"
 #include "../components/transform.h"
 #include "../components/turret.h"
 
@@ -30,17 +31,34 @@ class PositioningSystem
     static void update(entt::registry &registry, double dt)
     {
         auto view = registry.view<Transform, Turret>();
+        auto enemy_view = registry.view<Transform, Enemy>();
 
-        for (auto entity : view)
+        for (auto [_entity, transform, turret] : view.each())
         {
-            auto &transform = view.get<Transform>(entity);
+            // Find closest enemy
+            int closest = turret.range;
+            entt::entity closest_entity = entt::null;
 
-            auto mouse_position = Vec2<double>(asw::input::mouse.x, asw::input::mouse.y);
-            auto transform_center = transform.getPosition() + transform.getSize() / 2.0;
+            for (auto [enemy_entity, enemy_transform] : enemy_view.each())
+            {
+                auto distance = (transform.getPosition() - enemy_transform.getPosition()).length();
+                if (distance < closest)
+                {
+                    closest = distance;
+                    closest_entity = enemy_entity;
+                }
+            }
+
+            if (closest_entity == entt::null || closest > turret.range)
+            {
+                continue;
+            }
+
+            auto closest_transform = registry.get<Transform>(closest_entity);
 
             // Slow movement
-            auto desired_rotation = (mouse_position - transform_center).angle() * (180.0 / M_PI);
-            auto delta_rotation = (desired_rotation - transform.getRotation()) / 30.0;
+            auto desired_rotation = (closest_transform.getCenter() - transform.getCenter()).angle() * (180.0 / M_PI);
+            auto delta_rotation = (desired_rotation - transform.getRotation()) / turret.rotation_speed;
             transform.setRotation(transform.getRotation() + delta_rotation);
         }
     }

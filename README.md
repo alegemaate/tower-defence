@@ -6,6 +6,13 @@ Tower defence game built using asw and EnTT.
 
 SDL2 will need to be installed, all other dependencies are managed through CMake using CPM.
 
+### CMake
+
+```bash
+mkdir build
+cmake -Bbuild .
+```
+
 ### Windows (MSYS2)
 
 ```bash

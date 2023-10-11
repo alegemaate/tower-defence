@@ -7,6 +7,7 @@
 #include "../game/components/transform.h"
 #include "../game/components/turret.h"
 
+#include "../game/systems/enemy_placement_system.h"
 #include "../game/systems/physics_system.h"
 #include "../game/systems/positioning_system.h"
 #include "../game/systems/shooting_system.h"
@@ -19,13 +20,6 @@ const double TILE_HEIGHT = 128;
 
 void GameState::init()
 {
-
-    // Create entt sprite
-    auto turret = registry_.create();
-    registry_.emplace<Sprite>(turret, "assets/spritesheet.png",
-                              Vec4<double>(TILE_WIDTH * 19.0, TILE_HEIGHT * 10.0, TILE_WIDTH, TILE_HEIGHT), 90.0);
-    registry_.emplace<Transform>(turret, Vec2<double>(100.0, 100.0), Vec2<double>(64.0, 64.0), 45.0);
-    registry_.emplace<Turret>(turret, 100.0, 1.0, 1.0, 1.0);
 
     // Add tile map
     auto tile_map = registry_.create();
@@ -47,6 +41,7 @@ void GameState::draw()
     ShootingSystem::update(registry_, 1.0);
     PhysicsSystem::update(registry_, 1.0);
     TurretPlacementSystem::update(registry_);
+    EnemyPlacementSystem::update(registry_);
 }
 
 void GameState::cleanup()

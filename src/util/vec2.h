@@ -211,4 +211,25 @@ template <class T> class Vec2
     {
         return atan2(y, x);
     }
+
+    /**
+     * @brief Get length of Vec2 object
+     *
+     * @return double Length
+     */
+    auto length() const -> double
+    {
+        return sqrt(pow(x, 2) + pow(y, 2));
+    }
+
+    /**
+     * @brief Normalize Vec2 object
+     *
+     */
+    auto normalize() -> void
+    {
+        auto len = length();
+        x /= len;
+        y /= len;
+    }
 };

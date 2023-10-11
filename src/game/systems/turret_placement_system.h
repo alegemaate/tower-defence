@@ -39,7 +39,14 @@ class TurretPlacementSystem
             registry.emplace<Transform>(turret, mouse_position, Vec2<double>(64.0, 64.0), 0.0);
             registry.emplace<Sprite>(turret, "assets/spritesheet.png",
                                      Vec4<double>(128.0 * 19.0, 128.0 * 10.0, 128.0, 128.0), 90.0);
-            registry.emplace<Turret>(turret, 10.0, 10.0, 1.0, 1.0);
+            registry.emplace<Turret>(turret, Turret{
+                                                 .cooldown = 100.0,
+                                                 .initial_cooldown = 100.0,
+                                                 .speed = 1.0,
+                                                 .damage = 1.0,
+                                                 .range = 100.0,
+                                                 .rotation_speed = 30.0,
+                                             });
         }
     }
 };
