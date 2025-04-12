@@ -18,14 +18,14 @@
 #include "../components/transform.h"
 #include "../components/velocity.h"
 
-#include "../../util/vec2.h"
+#include <asw/asw.h>
 
 class EnemyPlacementSystem
 {
   public:
     static auto update(entt::registry &registry) -> void
     {
-        const auto mouse_position = Vec2<double>(asw::input::mouse.x, asw::input::mouse.y);
+        const auto mouse_position = asw::Vec2<float>(asw::input::mouse.x, asw::input::mouse.y);
         const auto screen_size = asw::display::getSize();
 
         // Check if mouse is in bounds
@@ -39,11 +39,11 @@ class EnemyPlacementSystem
         {
             auto enemy = registry.create();
 
-            registry.emplace<Transform>(enemy, mouse_position, Vec2<double>(64.0, 64.0), 0.0);
+            registry.emplace<Transform>(enemy, mouse_position, asw::Vec2<float>(64.0, 64.0), 0.0);
             registry.emplace<Sprite>(enemy, "assets/spritesheet.png",
-                                     Vec4<double>(128.0 * 15.0, 128.0 * 10.0, 128.0, 128.0), 90.0);
+                                     asw::Quad<float>(128.0 * 15.0, 128.0 * 10.0, 128.0, 128.0), 90.0);
             registry.emplace<Enemy>(enemy);
-            registry.emplace<Velocity>(enemy, Vec2<double>(0.0, 0.1));
+            registry.emplace<Velocity>(enemy, asw::Vec2<float>(0.0, 0.1));
         }
     }
 };

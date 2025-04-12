@@ -13,10 +13,6 @@
 #include "../game/systems/shooting_system.h"
 #include "../game/systems/sprite_renderer.h"
 #include "../game/systems/turret_placement_system.h"
-#include "../util/vec2.h"
-
-const double TILE_WIDTH = 128;
-const double TILE_HEIGHT = 128;
 
 void GameState::init()
 {
@@ -27,9 +23,15 @@ void GameState::init()
     registry_.get<TileMap>(tile_map).generate(registry_, 1024, 1024);
 }
 
-void GameState::update()
+void GameState::update(float dt)
 {
-    // Pass
+    Scene::update(dt);
+
+    PositioningSystem::update(registry_, dt);
+    ShootingSystem::update(registry_, dt);
+    PhysicsSystem::update(registry_, dt);
+    TurretPlacementSystem::update(registry_);
+    EnemyPlacementSystem::update(registry_);
 }
 
 void GameState::draw()
@@ -37,14 +39,4 @@ void GameState::draw()
     asw::draw::clearColor(asw::util::makeColor(255, 255, 255));
 
     SpriteRendererSystem::update(registry_);
-    PositioningSystem::update(registry_, 1.0);
-    ShootingSystem::update(registry_, 1.0);
-    PhysicsSystem::update(registry_, 1.0);
-    TurretPlacementSystem::update(registry_);
-    EnemyPlacementSystem::update(registry_);
-}
-
-void GameState::cleanup()
-{
-    // Pass
 }

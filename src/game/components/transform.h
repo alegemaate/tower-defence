@@ -10,8 +10,7 @@
  */
 #pragma once
 
-#include "../../util/vec2.h"
-
+#include <asw/asw.h>
 #include <cmath>
 
 class Transform
@@ -24,7 +23,7 @@ class Transform
      * @param size - Size in world space
      * @param rotation - Rotation in radians
      */
-    Transform(Vec2<double> position, Vec2<double> size, double rotation = 0.0)
+    Transform(asw::Vec2<float> position, asw::Vec2<float> size, float rotation = 0.0F)
         : position_(position), size_(size), rotation_(rotation)
     {
     }
@@ -33,7 +32,7 @@ class Transform
      * @brief Get position
      *
      */
-    auto getPosition() const -> Vec2<double>
+    auto getPosition() const -> asw::Vec2<float>
     {
         return position_;
     }
@@ -42,7 +41,7 @@ class Transform
      * @brief Set position
      *
      */
-    void setPosition(const Vec2<double> &position)
+    void setPosition(const asw::Vec2<float> &position)
     {
         position_ = position;
     }
@@ -51,7 +50,7 @@ class Transform
      * @brief Get size
      *
      */
-    auto getSize() const -> Vec2<double>
+    auto getSize() const -> asw::Vec2<float>
     {
         return size_;
     }
@@ -60,7 +59,7 @@ class Transform
      * @brief Set size
      *
      */
-    void setSize(const Vec2<double> &size)
+    void setSize(const asw::Vec2<float> &size)
     {
         size_ = size;
     }
@@ -69,7 +68,7 @@ class Transform
      * @brief Get rotation
      *
      */
-    auto getRotation() const -> double
+    auto getRotation() const -> float
     {
         return rotation_;
     }
@@ -78,9 +77,8 @@ class Transform
      * @brief Set rotation
      *
      */
-    void setRotation(double rotation)
+    void setRotation(float rotation)
     {
-
         rotation_ = rotation;
     }
 
@@ -88,18 +86,18 @@ class Transform
      * @brief Get center of transform
      *
      */
-    auto getCenter() const -> Vec2<double>
+    auto getCenter() const -> asw::Vec2<float>
     {
         return position_ + size_ / 2.0;
     }
 
   private:
     /// @brief Position in world space
-    Vec2<double> position_{0.0, 0.0};
+    asw::Vec2<float> position_{0.0, 0.0};
 
     /// @brief Size in world space
-    Vec2<double> size_{0.0, 0.0};
+    asw::Vec2<float> size_{0.0, 0.0};
 
     /// @brief Rotation in radians
-    double rotation_{0.0};
+    float rotation_{0.0};
 };

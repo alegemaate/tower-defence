@@ -11,37 +11,24 @@
 
 #pragma once
 
+#include <asw/asw.h>
+
 #include "../state.h"
 
 /**
  * @brief Init state, used to initialize the game
  */
-class InitState : public State
+class InitState : public asw::scene::Scene<States>
 {
   public:
     /**
      * @brief Initialize the init state
      * @param engine
      */
-    using State::State;
-
-    /**
-     * @brief Initialize the state
-     */
-    void init() override;
-
-    /**
-     * @brief Draw the state
-     */
-    void draw() override;
-
-    /**
-     * @brief Cleanup the state
-     */
-    void cleanup() override;
+    using asw::scene::Scene<States>::Scene;
 
     /**
      * @brief Update the state
      */
-    void update() override;
+    void update(float deltaTime) override;
 };

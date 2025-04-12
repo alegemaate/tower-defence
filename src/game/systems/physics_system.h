@@ -19,7 +19,7 @@
 class PhysicsSystem
 {
   public:
-    static auto update(entt::registry &registry, float delta) -> void
+    static auto update(entt::registry &registry, float dt) -> void
     {
         auto view = registry.view<Transform, Velocity>();
         for (auto entity : view)
@@ -28,8 +28,8 @@ class PhysicsSystem
             auto &velocity = view.get<Velocity>(entity);
 
             // Move transform
-            transform.setPosition(transform.getPosition() + velocity.velocity * delta);
-            transform.setRotation(transform.getRotation() + velocity.angular_velocity * delta);
+            transform.setPosition(transform.getPosition() + velocity.velocity * dt);
+            transform.setRotation(transform.getRotation() + velocity.angular_velocity * dt);
 
             // Offscreen
             const auto screen_size = asw::display::getSize();

@@ -7,7 +7,7 @@
 #include "../game/components/transform.h"
 #include "../game/systems/sprite_renderer.h"
 
-constexpr double INTRO_DURATION_MS = 500;
+constexpr double INTRO_DURATION_MS = 500.0;
 
 void IntroState::init()
 {
@@ -18,15 +18,17 @@ void IntroState::init()
 
     // Add transform component
     auto display_size = asw::display::getSize();
-    registry.emplace<Transform>(entity, Vec2<double>(0, 0), Vec2<double>(display_size.x, display_size.y));
+    registry.emplace<Transform>(entity, asw::Vec2<float>(0, 0), asw::Vec2<float>(display_size.x, display_size.y));
     registry.emplace<Sprite>(entity, "assets/intro.png");
 }
 
-void IntroState::update()
+void IntroState::update(float dt)
 {
+    Scene::update(dt);
+
     if (timer.getElapsedTime<std::chrono::milliseconds>() >= INTRO_DURATION_MS)
     {
-        this->setNextState(ProgramState::Game);
+        sceneManager.setNextScene(States::Game);
     }
 }
 
@@ -35,9 +37,4 @@ void IntroState::draw()
     asw::draw::clearColor(asw::util::makeColor(255, 0, 0, 255));
 
     SpriteRendererSystem::update(registry);
-}
-
-void IntroState::cleanup()
-{
-    // Pass
 }

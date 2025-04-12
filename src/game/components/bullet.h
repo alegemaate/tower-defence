@@ -11,8 +11,6 @@
 
 #pragma once
 
-#include "../../util/vec2.h"
-
 class Bullet
 {
   public:

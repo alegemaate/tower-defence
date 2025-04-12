@@ -11,6 +11,7 @@
 
 #pragma once
 
+#include <asw/asw.h>
 #include <entt/entt.hpp>
 #include <vector>
 
@@ -36,7 +37,7 @@ class TileMap
             for (int y = 0; y < height; y += 64)
             {
                 auto tile = registry.create();
-                registry.emplace<Transform>(tile, Vec2<double>(x, y), Vec2<double>(64.0, 64.0), 0.0);
+                registry.emplace<Transform>(tile, asw::Vec2<float>(x, y), asw::Vec2<float>(64.0, 64.0), 0.0);
                 registry.emplace<Tile>(tile, TileType::GRASS_PLOT);
                 auto &sprite = registry.emplace<Sprite>(tile, "assets/spritesheet.png",
                                                         Tile::getSpriteIndex(TileType::GRASS_PLOT));

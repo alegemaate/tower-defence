@@ -10,19 +10,20 @@
  */
 #pragma once
 
-#include "../state.h"
-
+#include <asw/asw.h>
 #include <asw/util/Timer.h>
 #include <entt/entt.hpp>
 
-class IntroState : public State
+#include "../state.h"
+
+class IntroState : public asw::scene::Scene<States>
 {
   public:
     /**
      * @brief Construct a new Intro State object
      *
      */
-    using State::State;
+    using asw::scene::Scene<States>::Scene;
 
     /**
      * @brief Initialize state
@@ -37,16 +38,10 @@ class IntroState : public State
     void draw() override;
 
     /**
-     * @brief Cleanup state
-     *
-     */
-    void cleanup() override;
-
-    /**
      * @brief Update state
      *
      */
-    void update() override;
+    void update(float deltaTime) override;
 
   private:
     /// @brief Timer to keep track of time of splash

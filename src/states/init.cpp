@@ -2,22 +2,9 @@
 
 #include <asw/asw.h>
 
-void InitState::init()
+void InitState::update(float dt)
 {
-    // Pass
-}
+    Scene::update(dt);
 
-void InitState::draw()
-{
-    // Pass
-}
-
-void InitState::cleanup()
-{
-    // Pass
-}
-
-void InitState::update()
-{
-    this->setNextState(ProgramState::Intro);
+    sceneManager.setNextScene(States::Intro);
 }

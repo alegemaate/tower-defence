@@ -11,13 +11,13 @@
 
 #pragma once
 
-#include "../../util/vec2.h"
+#include <asw/asw.h>
 
 struct Velocity
 {
     /// @brief Velocity
-    Vec2<double> velocity{0.0, 0.0};
+    asw::Vec2<float> velocity{0.0, 0.0};
 
     /// @brief Angular velocity
-    double angular_velocity{0.0};
+    float angular_velocity{0.0};
 };

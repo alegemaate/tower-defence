@@ -6,7 +6,7 @@
     {
       "label": "Build",
       "type": "shell",
-      "detail": "Run and build jim farm",
+      "detail": "Run and build tower defence",
       "command": "cd build && cmake --build . && ./TowerDefence",
       "windows": {
         "command": "cd build && cmake --build . && TowerDefence.exe"

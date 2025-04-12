@@ -24,7 +24,7 @@ class SpriteRegistry
      */
     static auto loadTexture(const std::string &path) -> asw::Texture
     {
-        if (SpriteRegistry::sprites_.find(path) == SpriteRegistry::sprites_.end())
+        if (!SpriteRegistry::sprites_.contains(path))
         {
             SpriteRegistry::sprites_[path] = asw::assets::loadTexture(path);
         }
