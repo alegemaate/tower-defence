@@ -21,7 +21,7 @@
 class ShootingSystem
 {
   public:
-    static auto update(entt::registry &registry, float delta) -> void
+    static auto update(entt::registry &registry, float dt) -> void
     {
         auto view = registry.view<Transform, Turret>();
         for (auto entity : view)
@@ -34,18 +34,18 @@ class ShootingSystem
             {
 
                 // Calculate vec2 velocity based on rotation of transform and speed of turret
-                auto bullet_velocity = Vec2<double>(cos(transform.getRotation() * M_PI / 180.0),
-                                                    sin(transform.getRotation() * M_PI / 180.0)) *
+                auto bullet_velocity = asw::Vec2<float>(std::cos(transform.getRotation() * M_PI / 180.0),
+                                                        std::sin(transform.getRotation() * M_PI / 180.0)) *
                                        turret.speed;
 
                 // Create bullet
                 auto bullet = registry.create();
-                registry.emplace<Transform>(bullet, transform.getCenter() - Vec2<double>(32.0, 32.0),
-                                            Vec2<double>(64.0, 64.0), transform.getRotation());
+                registry.emplace<Transform>(bullet, transform.getCenter() - asw::Vec2<float>(32.0, 32.0),
+                                            asw::Vec2<float>(64.0, 64.0), transform.getRotation());
                 registry.emplace<Velocity>(bullet, bullet_velocity, 1.0);
                 registry.emplace<Bullet>(bullet, turret.damage);
                 auto &sprite = registry.emplace<Sprite>(bullet, "assets/spritesheet.png",
-                                                        Vec4<double>(128.0 * 19.0, 128.0 * 11.0, 128.0, 128.0));
+                                                        asw::Quad<float>(128.0 * 19.0, 128.0 * 11.0, 128.0, 128.0));
                 sprite.setLayer(-16);
 
                 // Reset cooldown
@@ -54,7 +54,7 @@ class ShootingSystem
             else
             {
                 // Update cooldown
-                turret.cooldown = turret.cooldown - delta;
+                turret.cooldown = turret.cooldown - dt;
             }
         }
     }

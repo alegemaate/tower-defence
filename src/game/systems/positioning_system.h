@@ -14,7 +14,6 @@
 #include <cmath>
 #include <entt/entt.hpp>
 
-#include "../../util/vec2.h"
 #include "../components/enemy.h"
 #include "../components/transform.h"
 #include "../components/turret.h"
@@ -28,7 +27,7 @@ class PositioningSystem
      * @param registry Entity registry
      * @param dt Time since last update
      */
-    static void update(entt::registry &registry, double dt)
+    static void update(entt::registry &registry, float dt)
     {
         auto view = registry.view<Transform, Turret>();
         auto enemy_view = registry.view<Transform, Enemy>();
@@ -41,7 +40,7 @@ class PositioningSystem
 
             for (auto [enemy_entity, enemy_transform] : enemy_view.each())
             {
-                auto distance = (transform.getPosition() - enemy_transform.getPosition()).length();
+                auto distance = (transform.getPosition() - enemy_transform.getPosition()).magnitude();
                 if (distance < closest)
                 {
                     closest = distance;

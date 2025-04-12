@@ -81,7 +81,11 @@
     "complex": "cpp",
     "shared_mutex": "cpp",
     "typeindex": "cpp",
-    "*.ipp": "cpp"
+    "*.ipp": "cpp",
+    "regex": "cpp",
+    "coroutine": "cpp",
+    "csetjmp": "cpp",
+    "text_encoding": "cpp"
   },
   "sonarlint.pathToCompileCommands": "${workspaceFolder}/build/compile_commands.json"
 }

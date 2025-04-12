@@ -10,22 +10,21 @@
  */
 #pragma once
 
-#include "../state.h"
-
+#include <asw/asw.h>
 #include <entt/entt.hpp>
 
-class GameState : public State
+#include "../state.h"
+
+class GameState : public asw::scene::Scene<States>
 {
   public:
-    using State::State;
+    using asw::scene::Scene<States>::Scene;
 
     void init() override;
 
     void draw() override;
 
-    void cleanup() override;
-
-    void update() override;
+    void update(float dt) override;
 
   private:
     entt::registry registry_;

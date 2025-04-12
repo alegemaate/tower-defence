@@ -22,12 +22,12 @@ class TurretPlacementSystem
   public:
     static auto update(entt::registry &registry) -> void
     {
-        const auto mouse_position = Vec2<double>(asw::input::mouse.x, asw::input::mouse.y);
+        const auto mouse_position = asw::Vec2<float>(asw::input::mouse.x, asw::input::mouse.y);
         const auto screen_size = asw::display::getSize();
 
         // Check if mouse is in bounds
-        if (mouse_position.x < 0 || mouse_position.y < 0 || mouse_position.x > screen_size.x ||
-            mouse_position.y > screen_size.y)
+        const auto bounds = asw::Quad<float>(0.0F, 0.0F, screen_size.x, screen_size.y);
+        if (!bounds.contains(mouse_position))
         {
             return;
         }
@@ -36,9 +36,9 @@ class TurretPlacementSystem
         {
             auto turret = registry.create();
 
-            registry.emplace<Transform>(turret, mouse_position, Vec2<double>(64.0, 64.0), 0.0);
+            registry.emplace<Transform>(turret, mouse_position, asw::Vec2<float>(64.0, 64.0), 0.0);
             registry.emplace<Sprite>(turret, "assets/spritesheet.png",
-                                     Vec4<double>(128.0 * 19.0, 128.0 * 10.0, 128.0, 128.0), 90.0);
+                                     asw::Quad<float>(128.0 * 19.0, 128.0 * 10.0, 128.0, 128.0), 90.0);
             registry.emplace<Turret>(turret, Turret{
                                                  .cooldown = 100.0,
                                                  .initial_cooldown = 100.0,

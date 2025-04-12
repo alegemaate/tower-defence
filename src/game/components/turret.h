@@ -11,8 +11,6 @@
 
 #pragma once
 
-#include "../../util/vec2.h"
-
 struct Turret
 {
     /// @brief cooldown in seconds

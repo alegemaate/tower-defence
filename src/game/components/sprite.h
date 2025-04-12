@@ -13,8 +13,6 @@
 
 #include <asw/asw.h>
 
-#include "../../util/vec2.h"
-#include "../../util/vec4.h"
 #include "../sprite_registry.h"
 
 class Sprite
@@ -25,19 +23,18 @@ class Sprite
         sprite_ = SpriteRegistry::loadTexture(path);
 
         auto sprite_size = asw::util::getTextureSize(sprite_);
-        clip_ = Vec4<double>(0, 0, sprite_size.x, sprite_size.y);
+        clip_ = asw::Quad<float>(0, 0, sprite_size.x, sprite_size.y);
     }
 
-    Sprite(const std::string &path, const Vec4<double> &clip, const double rotation = 0.0)
+    Sprite(const std::string &path, const asw::Quad<float> &clip, const float rotation = 0.0)
         : clip_(clip), rotation_(rotation)
     {
         sprite_ = SpriteRegistry::loadTexture(path);
     }
 
-    void draw(const Vec2<double> &position, const Vec2<double> &size, double rotation) const
+    void draw(const asw::Vec2<float> &position, const asw::Vec2<float> &size, float rotation) const
     {
-        asw::draw::stretchSpriteRotateBlit(sprite_, clip_.x, clip_.y, clip_.z, clip_.w, position.x, position.y, size.x,
-                                           size.y, rotation + rotation_);
+        asw::draw::stretchSpriteRotateBlit(sprite_, clip_, asw::Quad<float>(position, size), rotation + rotation_);
     }
 
     void setLayer(int layer)
@@ -53,9 +50,9 @@ class Sprite
   private:
     asw::Texture sprite_;
 
-    Vec4<double> clip_;
+    asw::Quad<float> clip_;
 
-    double rotation_{0.0};
+    float rotation_{0.0F};
 
     int layer_{0};
 };
