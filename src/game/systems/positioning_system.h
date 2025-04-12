@@ -50,6 +50,7 @@ class PositioningSystem
 
             if (closest_entity == entt::null || closest > turret.range)
             {
+                turret.has_target = false;
                 continue;
             }
 
@@ -59,6 +60,7 @@ class PositioningSystem
             auto desired_rotation = (closest_transform.getCenter() - transform.getCenter()).angle() * (180.0 / M_PI);
             auto delta_rotation = (desired_rotation - transform.getRotation()) / turret.rotation_speed;
             transform.setRotation(transform.getRotation() + delta_rotation);
+            turret.has_target = true;
         }
     }
 };

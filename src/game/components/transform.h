@@ -23,7 +23,7 @@ class Transform
      * @param size - Size in world space
      * @param rotation - Rotation in radians
      */
-    Transform(asw::Vec2<float> position, asw::Vec2<float> size, double rotation = 0.0)
+    Transform(asw::Vec2<float> position, asw::Vec2<float> size, float rotation = 0.0F)
         : position_(position), size_(size), rotation_(rotation)
     {
     }
@@ -68,7 +68,7 @@ class Transform
      * @brief Get rotation
      *
      */
-    auto getRotation() const -> double
+    auto getRotation() const -> float
     {
         return rotation_;
     }
@@ -77,9 +77,8 @@ class Transform
      * @brief Set rotation
      *
      */
-    void setRotation(double rotation)
+    void setRotation(float rotation)
     {
-
         rotation_ = rotation;
     }
 
@@ -100,5 +99,5 @@ class Transform
     asw::Vec2<float> size_{0.0, 0.0};
 
     /// @brief Rotation in radians
-    double rotation_{0.0};
+    float rotation_{0.0};
 };

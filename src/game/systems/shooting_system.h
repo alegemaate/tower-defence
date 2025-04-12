@@ -30,7 +30,7 @@ class ShootingSystem
             auto &turret = view.get<Turret>(entity);
 
             // Shoot bullet
-            if (turret.cooldown <= 0)
+            if (turret.cooldown <= 0 && turret.has_target)
             {
 
                 // Calculate vec2 velocity based on rotation of transform and speed of turret
@@ -54,7 +54,7 @@ class ShootingSystem
             else
             {
                 // Update cooldown
-                turret.cooldown = turret.cooldown - dt;
+                turret.cooldown = std::max(turret.cooldown - dt, 0.0f);
             }
         }
     }

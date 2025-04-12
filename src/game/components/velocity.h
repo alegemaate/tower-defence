@@ -19,5 +19,5 @@ struct Velocity
     asw::Vec2<float> velocity{0.0, 0.0};
 
     /// @brief Angular velocity
-    double angular_velocity{0.0};
+    float angular_velocity{0.0};
 };

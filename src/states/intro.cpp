@@ -7,7 +7,7 @@
 #include "../game/components/transform.h"
 #include "../game/systems/sprite_renderer.h"
 
-constexpr double INTRO_DURATION_MS = 500;
+constexpr double INTRO_DURATION_MS = 500.0;
 
 void IntroState::init()
 {
